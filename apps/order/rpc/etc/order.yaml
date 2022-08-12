@@ -1,0 +1,6 @@
+Name: order.rpc
+ListenOn: 127.0.0.1:8080
+Etcd:
+  Hosts:
+  - 0.0.0.0:2379
+  Key: order.rpc
