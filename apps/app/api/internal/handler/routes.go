@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	user "orange/apps/app/api/internal/handler/user"
 	"orange/apps/app/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -53,5 +54,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: ProductDetailHandler(serverCtx),
 			},
 		},
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/login",
+				Handler: user.LoginHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/test",
+				Handler: user.TestHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/v1/user"),
 	)
 }

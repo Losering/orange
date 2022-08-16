@@ -7,6 +7,10 @@ info (
 	email: "463455256@qq.com"
 )
 
+import (
+	"apis/user.api"
+)
+
 type (
 	//banner
 	HomeBannerResponse {
@@ -168,4 +172,25 @@ service api-api {
 	@doc "商品详情"
 	@handler ProductDetailHandler
 	get /v1/product/detail (ProductDetailRequest) returns (ProductDetailResponse)
+}
+
+//========================> user v1 <===================================
+
+@server(
+	prefix: v1/user
+	group: user
+)
+service api-api {
+	@doc(
+		summary: "login"
+	)
+	@handler login
+	post /login (LoginReq) returns (LoginResp)
+	
+	@doc(
+		summary: "探活"
+	)
+	@handler test
+	get /test (TestReq) returns (TestRes)
+	
 }

@@ -133,3 +133,38 @@ type ProductDetailResponse struct {
 	Product  *Product   `json:"product"`
 	Comments []*Comment `json:"comments"`
 }
+
+type UserInfo struct {
+	Id         uint64 `json:"id"`          //用户ID
+	Username   string `json:"username"`    //用户名
+	Password   string `json:"password"`    //用户密码，MD5加密
+	Phone      string `json:"phone"`       //手机号
+	Question   string `json:"question"`    //找回密码问题
+	Answer     string `json:"answer"`      //找回密码答案
+	CreateTime int64  `json:"create_time"` //创建时间
+	UpdateTime int64  `json:"update_time"` //更新时间
+}
+
+type LoginReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type LoginResp struct {
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int64  `json:"accessExpire"`
+}
+
+type UserInfoReq struct {
+}
+
+type UserInfoResp struct {
+	UserInfo UserInfo `json:"userInfo"`
+}
+
+type TestReq struct {
+}
+
+type TestRes struct {
+	Code int32 `json:"code"`
+}
