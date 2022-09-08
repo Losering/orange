@@ -155,6 +155,14 @@ type LoginResp struct {
 	AccessExpire int64  `json:"accessExpire"`
 }
 
+type RegistReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type RegistResp struct {
+}
+
 type UserInfoReq struct {
 }
 

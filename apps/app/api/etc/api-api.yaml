@@ -2,6 +2,17 @@ Name: api-api
 Host: 0.0.0.0
 Port: 8888
 
+Log:
+  ServiceName: api-api
+  Mode: console
+  Level: error
+  Encoding: plain
+
+
+JwtAuth:
+  AccessSecret: 1975c369-93e3-54aa-9ae9-bd08a8b9fab3
+  AccessExpire: 86400
+
 OrderRPC:
   Etcd:
     Hosts:

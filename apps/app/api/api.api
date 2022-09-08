@@ -188,9 +188,27 @@ service api-api {
 	post /login (LoginReq) returns (LoginResp)
 	
 	@doc(
+		summary: "regist"
+	)
+	@handler regist
+	post /regist (RegistReq) returns (RegistResp)
+	
+	@doc(
 		summary: "探活"
 	)
 	@handler test
 	get /test (TestReq) returns (TestRes)
 	
+}
+
+//need login
+@server(
+	prefix: v1/user
+	group: user
+	jwt: JwtAuth // use jwt
+)
+service api-api {
+	@doc "get user info"
+	@handler detail
+	post /info (UserInfoReq) returns (UserInfoResp)
 }

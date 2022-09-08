@@ -3,10 +3,14 @@ package user
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"orange/apps/app/api/internal/svc"
 	"orange/apps/app/api/internal/types"
+	"orange/apps/user/rpc/user"
+	"orange/pkg/jwtx"
 
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -25,10 +29,25 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
-	// todo: add your logic here and delete this line
-	fmt.Println(err)
+	var loginReq user.LoginRequest
+	loginReq.Username = req.Username
+	loginReq.Password = req.Password
+	res, err := l.svcCtx.UserRPC.Login(l.ctx, &loginReq)
+	fmt.Println("usrPRC error:", err)
+	if err != nil {
+		return nil, errors.Wrapf(err, "req: %+v", req)
+	}
+	fmt.Println("access")
+
+	//generate token
+	now := time.Now().Unix()
+	accessExpire := l.svcCtx.Config.JwtAuth.AccessExpire
+	accessToken, err := jwtx.GetToken(l.svcCtx.Config.JwtAuth.AccessSecret, now, accessExpire, res.Id)
+	if err != nil {
+		return nil, err
+	}
 	return &types.LoginResp{
-		AccessToken:  "123123123",
-		AccessExpire: 123123,
+		AccessToken:  accessToken,
+		AccessExpire: now + accessExpire,
 	}, nil
 }

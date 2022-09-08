@@ -32,6 +32,15 @@ type LoginResp {
 }
 //用户登陆
 
+//用户注册
+type RegistReq {
+	Username string `json:"username"` 
+	Password string `json:"password"`
+}
+
+type RegistResp {
+}
+//用户注册
 
 //用户详情
 type (
