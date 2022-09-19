@@ -22,7 +22,6 @@ func LoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		// 	result.ParamErrorResult(r, w, err)
 		// 	return
 		// }
-
 		l := user.NewLoginLogic(r.Context(), svcCtx)
 		resp, err := l.Login(&req)
 		result.HttpResult(r, w, resp, err)

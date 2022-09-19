@@ -32,9 +32,12 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 	var loginReq user.LoginRequest
 	loginReq.Username = req.Username
 	loginReq.Password = req.Password
+	fmt.Println("username", loginReq.Username)
+	fmt.Println("Password", loginReq.Password)
+
 	res, err := l.svcCtx.UserRPC.Login(l.ctx, &loginReq)
-	fmt.Println("usrPRC error:", err)
 	if err != nil {
+		fmt.Println("usrPRC error:", err)
 		return nil, errors.Wrapf(err, "req: %+v", req)
 	}
 	fmt.Println("access")
