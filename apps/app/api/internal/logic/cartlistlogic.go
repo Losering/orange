@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"orange/apps/app/api/internal/svc"
 	"orange/apps/app/api/internal/types"
@@ -25,6 +26,6 @@ func NewCartListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartList
 
 func (l *CartListLogic) CartList(req *types.CartListRequest) (resp *types.CartListResponse, err error) {
 	// todo: add your logic here and delete this line
-
+	fmt.Println("test")
 	return
 }
